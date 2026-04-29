@@ -16,10 +16,11 @@ export default function Experience() {
             <li>Built an AI-powered Telugu Ancient diet menu generator using structured nutrition datasets.</li>
             <li>Implemented a RAG-based assistant to handle user queries.</li>
             <li>Designed calorie-aware meal planning logic with an interactive Streamlit interface.</li>
-            <div className="flex flex-wrap gap-4 mt-6 ml-4">
+          </ul>
+          <div className="flex flex-wrap gap-4 mt-6 ml-4">
             <a href="https://code.swecha.org/DhanushGopavaram/team-project.git" target="_blank" rel="noopener noreferrer"
-            className="flex items-center gap-2 px-3 py-1 text-xs font-mono text-greyLight border border-greyDark rounded-full hover:text-pureWhite hover:border-pureWhite transition-colors">
-            {/* GitLab SVG Icon */}
+               className="flex items-center gap-2 px-3 py-1 text-xs font-mono text-greyLight border border-greyDark rounded-full hover:text-pureWhite hover:border-pureWhite transition-colors">
+              {/* GitLab SVG Icon */}
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m22 13.29-3.33-10a.42.42 0 0 0-.14-.18.38.38 0 0 0-.22-.11.39.39 0 0 0-.23.07.42.42 0 0 0-.14.18l-2.26 6.67H8.32L6.1 3.26a.42.42 0 0 0-.1-.18.38.38 0 0 0-.26-.08.39.39 0 0 0-.23.07.42.42 0 0 0-.14.18L2 13.29a.74.74 0 0 0 .27.83L12 21l9.69-6.88a.71.71 0 0 0 .31-.83Z"/></svg>
               GitLab
             </a>
@@ -28,9 +29,7 @@ export default function Experience() {
               <ExternalLink size={16}/> Certificate
             </a>
           </div>
-        </li>
-     </ul>
-    </motion.div>
+        </motion.div>
 
         <motion.div initial={{ x: -20, opacity: 0 }} whileInView={{ x: 0, opacity: 1 }} viewport={{ once: true }}>
           <div className="absolute w-3 h-3 bg-green-500 rounded-full -left-[7px] mt-2"></div>

@@ -1,6 +1,4 @@
 import { motion } from 'framer-motion';
-import { ExternalLink, Mail, MapPin } from 'lucide-react';
-import { Github, Linkedin } from './components/icons';
 import Projects from './components/Projects';
 import HeroImageReveal from './components/HeroImageReveal';
 

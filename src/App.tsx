@@ -6,18 +6,20 @@ export default function App() {
   return (
     <div className="min-h-screen bg-black flex flex-col font-inter">
       
-      <nav className="w-full bg-pureWhite text-black px-6 py-4 flex justify-between items-center sticky top-0 z-50">
-  <div className="font-anton text-4xl font-black tracking-tighter">DG.</div>
-  <div className="hidden md:flex gap-8 text-sm font-bold font-inter">
-    <a href="#about" className="hover:opacity-70 transition-opacity">About Me</a>
-    <a href="#projects" className="hover:opacity-70 transition-opacity">My Projects</a>
-    <a href="#experience" className="hover:opacity-70 transition-opacity">Experience</a>
-    <a href="#contact" className="hover:opacity-70 transition-opacity">Contact</a>
+      <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-4xl px-8 py-4 flex justify-between items-center backdrop-blur-2xl bg-white/5 border border-white/10 rounded-2xl shadow-2xl">
+  <div className="font-anton text-2xl text-white tracking-tighter">DG.</div>
+  
+  <div className="hidden md:flex gap-10 text-[11px] font-mono uppercase tracking-[0.2em] text-white/60">
+    <a href="#projects" className="hover:text-white transition-colors">Works</a>
+    <a href="#experience" className="hover:text-white transition-colors">Experience</a>
+    <a href="#contact" className="hover:text-white transition-colors">Connect</a>
   </div>
-  <a href="#" className="border border-black px-6 py-2 rounded-full text-sm font-inter hover:bg-black hover:text-white transition-colors">
+
+  <a href="#" className="border border-white/20 px-5 py-2 rounded-xl text-[10px] font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all">
     Resume
   </a>
 </nav>
+
 
 
 
@@ -26,19 +28,50 @@ export default function App() {
         
         <section className="w-full min-h-[80vh] bg-black flex flex-col justify-center items-center relative overflow-hidden">
           <motion.div 
-          initial={{ y: 50, opacity: 0 }} 
-          animate={{ y: 0, opacity: 1 }} 
-          transition={{ duration: 0.8 }}
-          className="w-full text-center">
-          <h1 className="font-anton text-[12vw]  text-pureWhite uppercase tracking-[-0.05em] transform scale-y-125 origin-center">
+          initial={{ filter: "blur(20px)", opacity: 0, y: 50 }} 
+          animate={{ filter: "blur(0px)", opacity: 1, y: 0 }} 
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} // Custom smooth ease
+          className="w-full text-center"
+          >
+          <h1 className="font-anton text-[12vw] text-pureWhite uppercase tracking-[-0.05em] transform scale-y-125 origin-center leading-[0.8]">
           DHANUSH GOPAVARAM</h1>
-          </motion.div  >
-          <div className="absolute bottom-12 text-center w-full px-6">
-          <p className="text-white font-inter text-sm font-bold tracking-widest uppercase opacity-80">
-          AI-Focused Software Engineer | Breaking Limits through Code | Caffiene to Code 
-          </p>
-          </div>
-        </section>
+          </motion.div>
+
+         {/* Bottom Content Group */}
+        <div className="absolute bottom-0 w-full flex flex-col items-center">
+
+  {/* Premium Marquee (TOP) */}
+  <div className="w-full overflow-hidden bg-gradient-to-r from-[#312E81] to-[#5B21B6] py-3 select-none">
+    <motion.div  
+      animate={{ x: ["0%", "-50%"] }}
+      transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
+      className="flex whitespace-nowrap items-center"
+    >
+      {[...Array(15)].map((_, i) => (
+        <div key={i} className="flex items-center gap-8 px-4">
+
+          <span className="text-white font-sora font-semibold text-[13px] uppercase tracking-[0.18em]">
+            Building with Code
+          </span>
+
+          <span className="text-white text-[14px] font-semibold opacity-80">
+            {"</>"}
+          </span>
+
+        </div>
+      ))}
+    </motion.div>
+  </div>
+
+  {/* Bio line (NOW BELOW) */}
+  <div className="mt-4 mb-4 px-6 text-center">
+    <p className="text-white/50 font-sora text-[10px] font-semibold tracking-[0.3em] uppercase">
+      AI-Focused Software Engineer | Breaking Limits through Code | Caffeine to Code
+    </p>
+  </div>
+
+</div>
+</section>
 
         <HeroImageReveal /> 
 

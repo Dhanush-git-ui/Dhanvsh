@@ -1,3 +1,4 @@
+
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
@@ -42,6 +43,26 @@ const projects = [
 export default function Projects() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const imageRef = useRef<HTMLDivElement>(null);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // GSAP Mouse Follow Effect for the hidden image
   useEffect(() => {
@@ -92,7 +113,31 @@ export default function Projects() {
          <h2 className="font-anton text-6xl md:text-[8vw] text-white uppercase leading-[0.8]">
             Selected<br/>Works
          </h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       </div>
+
+
+
 
       {/* 3. INTERACTIVE LIST */}
       <div className="w-full border-t border-white/20">
@@ -128,6 +173,9 @@ export default function Projects() {
             </div>
           </div>
         ))}
+
+
+
       </div>
     </section>
   );

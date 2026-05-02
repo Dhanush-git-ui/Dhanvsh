@@ -3,6 +3,7 @@
 @theme {
   --font-anton: "Anton", sans-serif;
   --font-inter: "Inter", sans-serif;
+  --font-epilogue: "Epilogue", sans-serif;
 
   --color-bgDark: #000000;
   --color-textLight: #F5F5F5;
@@ -95,3 +96,4 @@
     border-image-slice: 1;
   }
 }
+@media print { body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }

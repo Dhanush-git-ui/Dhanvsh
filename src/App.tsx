@@ -17,7 +17,7 @@ export default function App() {
     <a href="#contact" className="hover:text-white transition-colors">Connect</a>
   </div>
 
-  <a href="#" className="border border-white/20 px-5 py-2 rounded-xl text-[10px] font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all">
+  <a href="/resume.html" target="_blank" className="border border-white/20 px-5 py-2 rounded-xl text-[10px] font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all">
     Resume
   </a>
 </nav>
@@ -28,46 +28,47 @@ export default function App() {
       {/* ================= RIGHT MAIN CONTENT ================= */}
       <main className="flex-1">
         
-        <section className="w-full min-h-[80vh] bg-black flex flex-col justify-center items-center relative overflow-hidden">
-          <motion.div 
-          initial={{ filter: "blur(20px)", opacity: 0, y: 50 }} 
-          animate={{ filter: "blur(0px)", opacity: 1, y: 0 }} 
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} // Custom smooth ease
-          className="w-full text-center"
-          >
-          <h1 className="font-anton text-[12vw] text-pureWhite uppercase tracking-[-0.05em] transform scale-y-125 origin-center leading-[0.8]">
-          DHANUSH GOPAVARAM</h1>
-          </motion.div>
+        <section className="w-full h-screen bg-black flex flex-col items-center relative overflow-hidden">
+          
+          <div className="flex-1 flex flex-col justify-center items-center w-full px-6 pt-20">
+            <motion.div 
+              initial={{ filter: "blur(20px)", opacity: 0, y: 50 }} 
+              animate={{ filter: "blur(0px)", opacity: 1, y: 0 }} 
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} 
+              className="w-full text-center relative z-10"
+            >
+              <h1 className="font-anton text-[13vw] text-pureWhite uppercase tracking-[-0.05em] transform scale-y-110 origin-center leading-[0.8]">
+                DHANUSH GOPAVARAM
+              </h1>
+            </motion.div>
+          </div>
 
          {/* Bottom Content Group */}
         <div className="absolute bottom-0 w-full flex flex-col items-center">
 
   {/* Premium Marquee (TOP) */}
-  <div className="w-full overflow-hidden bg-gradient-to-r from-[#312E81] to-[#5B21B6] py-3 select-none">
+  <div className="w-full overflow-hidden bg-[#5A4BEB] py-4 select-none">
     <motion.div  
       animate={{ x: ["0%", "-50%"] }}
-      transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
-      className="flex whitespace-nowrap items-center"
+      transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+      className="flex whitespace-nowrap items-center w-max gap-8"
     >
-      {[...Array(15)].map((_, i) => (
-        <div key={i} className="flex items-center gap-8 px-4">
-
-          <span className="text-white font-sora font-semibold text-[13px] uppercase tracking-[0.18em]">
-            Building with Code
+      {[...Array(20)].map((_, i) => (
+        <div key={i} className="flex items-center gap-8">
+          <span className="text-white font-epilogue font-semibold text-2xl md:text-3xl uppercase">
+            Designer At Work
           </span>
-
-          <span className="text-white text-[14px] font-semibold opacity-80">
-            {"</>"}
+          <span className="text-white font-epilogue font-semibold text-xl opacity-40">
+            ✖
           </span>
-
         </div>
       ))}
     </motion.div>
   </div>
 
   {/* Bio line (NOW BELOW) */}
-  <div className="mt-4 mb-4 px-6 text-center">
-    <p className="text-white/50 font-sora text-[10px] font-semibold tracking-[0.3em] uppercase">
+  <div className="py-6 px-6 text-center">
+    <p className="text-white/40 font-sora text-[10px] md:text-[11px] font-semibold tracking-[0.4em] uppercase">
       AI-Focused Software Engineer | Breaking Limits through Code | Caffeine to Code
     </p>
   </div>
@@ -79,21 +80,7 @@ export default function App() {
         <HeroImageReveal /> 
 
 
-        {/* Marquee Skills */}
-        <div className="w-full bg-pureWhite py-4 overflow-hidden flex items-center border-y border-greyDark">
-          <motion.div 
-            className="flex whitespace-nowrap"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ ease: "linear", duration: 15, repeat: Infinity }}
-          >
-            <span className="text-black font-anton text-2xl md:text-4xl uppercase px-4">
-              REACT.JS • RAG & LLMs • PYTHON • NODE.JS • LANGCHAIN • STREAMLIT • NEXT.JS • 
-            </span>
-            <span className="text-black font-anton text-2xl md:text-4xl uppercase px-4">
-              REACT.JS • RAG & LLMs • PYTHON • NODE.JS • LANGCHAIN • STREAMLIT • NEXT.JS • 
-            </span>
-          </motion.div>
-        </div>
+
 
         {/* Experience Section */}
         <section className="px-6 md:px-12 py-24 bg-[#0a0a0a] border-b border-greyDark">

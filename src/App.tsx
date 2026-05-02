@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion';
 import Projects from './components/Projects';
 import HeroImageReveal from './components/HeroImageReveal';
+import Lenis from 'lenis';
+import { useEffect } from 'react';
+
 
 export default function App() {
   return (
@@ -72,6 +75,7 @@ export default function App() {
 
 </div>
 </section>
+
 
         <HeroImageReveal /> 
 

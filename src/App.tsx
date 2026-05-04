@@ -1,12 +1,69 @@
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { useEffect } from 'react';
+import Lenis from 'lenis';
 import Projects from './components/Projects';
 import HeroImageReveal from './components/HeroImageReveal';
 
 
 
 export default function App() {
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+  
+  const springConfig = { damping: 25, stiffness: 150 };
+  const cursorXSpring = useSpring(cursorX, springConfig);
+  const cursorYSpring = useSpring(cursorY, springConfig);
+
+  useEffect(() => {
+    // Initialize Lenis Smooth Scroll
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // Mouse Move for Custom Cursor
+    const moveCursor = (e: MouseEvent) => {
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
+    };
+
+    window.addEventListener('mousemove', moveCursor);
+
+    return () => {
+      lenis.destroy();
+      window.removeEventListener('mousemove', moveCursor);
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen bg-black flex flex-col font-inter">
+    <div className="min-h-screen bg-black flex flex-col font-inter selection:bg-[#D3FF52] selection:text-black">
+      
+      {/* Custom Cursor */}
+      <motion.div 
+        className="fixed top-0 left-0 w-8 h-8 bg-white rounded-full pointer-events-none z-[9999] mix-blend-difference"
+        style={{
+          x: cursorXSpring,
+          y: cursorYSpring,
+          translateX: '-50%',
+          translateY: '-50%'
+        }}
+      />
+
+      {/* Global Grain/Noise Texture */}
+      <div className="fixed inset-0 pointer-events-none z-[9000] opacity-[0.03] mix-blend-overlay" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
+
       
       <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-4xl px-8 py-4 flex justify-between items-center backdrop-blur-2xl bg-white/5 border border-white/10 rounded-2xl shadow-2xl">
   <div className="font-anton text-2xl text-white tracking-tighter">DG.</div>
@@ -78,9 +135,6 @@ export default function App() {
 
 
         <HeroImageReveal /> 
-
-
-
 
         {/* Experience Section */}
         <section className="px-6 md:px-12 py-24 bg-[#0a0a0a] border-b border-greyDark">

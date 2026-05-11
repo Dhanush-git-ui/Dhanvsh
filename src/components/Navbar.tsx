@@ -7,7 +7,7 @@ export default function Navbar() {
       
       <div className="hidden md:flex gap-10 text-[11px] font-mono uppercase tracking-[0.2em] text-white/60">
         <Link to="/" className="hover:text-white transition-colors">Works</Link>
-        <Link to="/about" className="hover:text-white transition-colors">About</Link>
+        <a href="#about" className="hover:text-white transition-colors">About</a>
         <a href="#experience" className="hover:text-white transition-colors">Experience</a>
         <a href="#contact" className="hover:text-white transition-colors">Connect</a>
       </div>

@@ -4,6 +4,8 @@ import Lenis from 'lenis';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import AboutPage from './pages/AboutPage';
+import Loader from './components/Loader';
+
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -41,6 +43,7 @@ function Layout() {
 
   return (
     <div className="min-h-screen bg-black flex flex-col font-inter selection:bg-[#D3FF52] selection:text-black">
+      <Loader />
       <Navbar />
       
       {/* Global Grain/Noise Texture */}

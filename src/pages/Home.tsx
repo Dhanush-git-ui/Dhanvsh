@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import Projects from '../components/Projects';
 import HeroImageReveal from '../components/HeroImageReveal';
+import About from '../components/about';
 
 export default function Home() {
   return (
@@ -23,16 +24,16 @@ export default function Home() {
           <div className="w-full overflow-hidden bg-[#5A4BEB] py-4 select-none">
             <motion.div  
               animate={{ x: ["0%", "-50%"] }}
-              transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
               className="flex whitespace-nowrap items-center w-max gap-8"
             >
               {[...Array(20)].map((_, i) => (
                 <div key={i} className="flex items-center gap-8">
-                  <span className="text-white font-epilogue font-semibold text-2xl md:text-3xl uppercase">
+                  <span className="text-white font-poppins font-bold text-2xl md:text-3xl uppercase">
                     Designer At Work
                   </span>
-                  <span className="text-white font-epilogue font-semibold text-xl opacity-40">
-                    ✖
+                  <span className="text-white font-poppins font-bold text-xl opacity-40">
+                    &lt;/&gt;
                   </span>
                 </div>
               ))}
@@ -80,6 +81,10 @@ export default function Home() {
 
       <div id="projects">
         <Projects />
+      </div>
+
+      <div id="about">
+        <About />
       </div>
 
       <section className="px-6 md:px-12 py-24 border-t border-greyDark bg-[#0a0a0a]">

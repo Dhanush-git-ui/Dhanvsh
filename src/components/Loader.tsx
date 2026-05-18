@@ -1,27 +1,311 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+const greetings = ["Hello", "Bonjour", "Ciao", "Hola"];
 
 export default function Loader() {
+  const [step, setStep] = useState(0);
+  const [showBrand, setShowBrand] = useState(false);
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setVisible(false), 2400);
-    return () => clearTimeout(timer);
-  }, []);
+    if (step < greetings.length - 1) {
+      const timer = setTimeout(() => {
+        setStep((prev) => prev + 1);
+      }, step === 0 ? 1200 : 1050);
 
-  if (!visible) return null;
+      return () => clearTimeout(timer);
+    }
+
+    /*
+      This controls how long the final greeting "Hola" stays
+      before DG appears.
+    */
+    const brandTimer = setTimeout(() => {
+      setShowBrand(true);
+    }, 1500);
+
+    return () => clearTimeout(brandTimer);
+  }, [step]);
+
+  useEffect(() => {
+    if (!showBrand) return;
+
+    const exitTimer = setTimeout(() => {
+      setVisible(false);
+    }, 2600);
+
+    return () => clearTimeout(exitTimer);
+  }, [showBrand]);
 
   return (
-    <div style={{ position:'fixed', inset:0, backgroundColor:'#000', display:'flex', alignItems:'center', justifyContent:'center', zIndex:9999, animation:'loaderFadeOut 0.6s ease forwards 2s' }}>
-      <div style={{ display:'flex', fontFamily:'Anton, sans-serif', fontSize:'8rem', fontWeight:700, letterSpacing:'2px', color:'white' }}>
-        <span style={{ opacity:0, animation:'letterIn 0.5s ease forwards 0s' }}>D</span>
-        <span style={{ opacity:0, animation:'letterIn 0.5s ease forwards 0.15s' }}>G</span>
-        <span style={{ opacity:0, animation:'letterIn 0.5s ease forwards 0.3s', color:'#5A4BEB' }}>.</span>
-      </div>
-    </div>
+    <AnimatePresence>
+      {visible && (
+        <motion.div
+          initial={{ opacity: 1 }}
+          exit={{
+            opacity: 0,
+            scale: 1.025,
+            filter: "blur(10px)",
+          }}
+          transition={{
+            duration: 1.1,
+            ease: [0.76, 0, 0.24, 1],
+          }}
+          className="
+            fixed 
+            inset-0 
+            z-[9999] 
+            flex 
+            items-center 
+            justify-center 
+            overflow-hidden 
+            bg-black 
+            text-white
+            font-['Anton',_sans-serif]
+          "
+        >
+          {/* Top small label */}
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.75 }}
+            className="
+              absolute 
+              left-6 
+              top-6 
+              font-sans
+              text-[10px] 
+              uppercase 
+              tracking-[0.45em] 
+              text-white/35 
+              md:left-10 
+              md:top-10
+            "
+          >
+            Portfolio
+          </motion.div>
+
+          {/* Bottom loading number */}
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.75 }}
+            className="
+              absolute 
+              bottom-6 
+              right-6 
+              font-sans
+              text-xs 
+              font-medium
+              tracking-[0.25em]
+              text-white/35 
+              md:bottom-10 
+              md:right-10
+            "
+          >
+            {showBrand ? "100%" : `${Math.min((step + 1) * 25, 90)}%`}
+          </motion.div>
+
+          {/* Main content */}
+          <div className="relative flex h-72 w-full flex-col items-center justify-center px-6">
+            <AnimatePresence mode="wait">
+              {!showBrand ? (
+                <motion.div
+                  key={greetings[step]}
+                  initial={{
+                    opacity: 0,
+                    y: 18,
+                    scale: 0.97,
+                    filter: "blur(8px)",
+                  }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    filter: "blur(0px)",
+                  }}
+                  exit={{
+                    opacity: 0,
+                    y: -18,
+                    scale: 1.03,
+                    filter: "blur(8px)",
+                  }}
+                  transition={{
+                    duration: 0.65,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="absolute inset-0 flex items-center justify-center"
+                >
+                  <h1
+                    className="
+                      text-[4.8rem] 
+                      font-normal
+                      uppercase
+                      leading-none
+                      tracking-[-0.045em] 
+                      text-white 
+                      md:text-[8rem]
+                      lg:text-[9rem]
+                    "
+                  >
+                    {greetings[step]}
+                  </h1>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="brand"
+                  initial={{
+                    opacity: 0,
+                    y: 26,
+                    scale: 0.92,
+                    filter: "blur(10px)",
+                  }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    filter: "blur(0px)",
+                  }}
+                  exit={{
+                    opacity: 0,
+                    y: -26,
+                    scale: 1.035,
+                    filter: "blur(10px)",
+                  }}
+                  transition={{
+                    duration: 0.9,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="relative flex items-end"
+                >
+                  <motion.span
+                    initial={{ x: 34, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{
+                      duration: 0.72,
+                      delay: 0.08,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className="
+                      text-[7rem] 
+                      font-normal 
+                      uppercase
+                      leading-none 
+                      tracking-[-0.065em] 
+                      md:text-[13rem]
+                    "
+                  >
+                    D
+                  </motion.span>
+
+                  <motion.span
+                    initial={{ x: -34, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{
+                      duration: 0.72,
+                      delay: 0.22,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className="
+                      text-[7rem] 
+                      font-normal 
+                      uppercase
+                      leading-none 
+                      tracking-[-0.065em] 
+                      md:text-[13rem]
+                    "
+                  >
+                    G
+                  </motion.span>
+
+                  <motion.span
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{
+                      duration: 0.48,
+                      delay: 0.58,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className="
+                      ml-3 
+                      text-[7rem] 
+                      font-normal 
+                      leading-none 
+                      tracking-[-0.065em] 
+                      text-[#5A4BEB] 
+                      md:text-[13rem]
+                    "
+                  >
+                    .
+                  </motion.span>
+
+                  {/* Logo underline */}
+                  <motion.div
+                    initial={{ scaleX: 0, opacity: 0 }}
+                    animate={{ scaleX: 1, opacity: 1 }}
+                    transition={{
+                      duration: 0.75,
+                      delay: 0.48,
+                      ease: [0.76, 0, 0.24, 1],
+                    }}
+                    className="
+                      absolute 
+                      -bottom-5 
+                      left-1/2 
+                      h-px 
+                      w-52 
+                      -translate-x-1/2 
+                      origin-center 
+                      bg-white/30 
+                      md:w-80
+                    "
+                  />
+
+                  {/* Tiny caption */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.65,
+                      delay: 0.9,
+                      ease: "easeOut",
+                    }}
+                    className="
+                      absolute 
+                      -bottom-12 
+                      left-1/2 
+                      w-max 
+                      -translate-x-1/2 
+                      font-sans 
+                      text-[10px] 
+                      font-semibold 
+                      uppercase 
+                      tracking-[0.45em] 
+                      text-white/35
+                    "
+                  >
+                    Digital Portfolio
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Bottom progress line */}
+          <div className="absolute bottom-0 left-0 h-px w-full bg-white/10">
+            <motion.div
+              initial={{ width: "0%" }}
+              animate={{ width: showBrand ? "100%" : `${(step + 1) * 22}%` }}
+              transition={{
+                duration: 0.7,
+                ease: [0.76, 0, 0.24, 1],
+              }}
+              className="h-full bg-white"
+            />
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
-
-
-
-
-

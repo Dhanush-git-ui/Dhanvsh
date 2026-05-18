@@ -4,8 +4,10 @@ import Lenis from 'lenis';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import AboutPage from './pages/AboutPage';
+import ProjectsPage from './pages/ProjectsPage';
+import ExperiencePage from './pages/ExperiencePage';
+import ConnectPage from './pages/contact';
 import Loader from './components/Loader';
-
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -52,6 +54,9 @@ function Layout() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/experience" element={<ExperiencePage />} />
+        <Route path="/contact" element={<ConnectPage />} />
       </Routes>
     </div>
   );

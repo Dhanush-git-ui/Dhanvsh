@@ -1,5 +1,4 @@
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { useRef } from 'react';
+import { motion } from 'framer-motion';
 import { ScratchToReveal } from './ScratchToReveal';
 
 const skillStack = [
@@ -15,98 +14,27 @@ const skillStack = [
   { name: 'Node.js', icon: 'nodejs' },
 ];
 
-const philosophy = [
-  {
-    title: "Digital Kineticism",
-    description: "I believe interfaces should feel physical. Every interaction is an opportunity to create a moment of tactile satisfaction through code and motion."
-  },
-  {
-    title: "The Frictionless Edge",
-    description: "Performance isn't just about speed; it's about flow. I build systems that anticipate the user, removing the invisible walls between intent and action."
-  },
-  {
-    title: "Aesthetic Precision",
-    description: "Design is a technical discipline. I bridge the gap between pixel-perfect vision and high-performance execution with surgical accuracy."
-  }
-];
-
 export default function About() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
-  const yTranslate = useTransform(smoothProgress, [0, 1], [100, -100]);
-
   return (
-    <section ref={containerRef} className="relative min-h-screen overflow-hidden bg-[#050505] py-32 text-white">
+    <section className="relative min-h-screen overflow-hidden bg-[#050505] py-32 text-white flex items-center">
       {/* ----- Background Atmosphere ----- */}
       <div className="absolute inset-0 z-0">
         <div className="absolute -left-1/4 top-1/4 h-[600px] w-[600px] animate-blob rounded-full bg-[#D3FF52]/5 blur-[140px]" />
         <div className="absolute -right-1/4 bottom-1/4 h-[600px] w-[600px] animate-blob rounded-full bg-white/5 blur-[140px] [animation-delay:2s]" />
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] brightness-75" />
+        <div 
+          className="absolute inset-0 opacity-[0.03] brightness-75 mix-blend-overlay"
+          style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} 
+        />
       </div>
 
-      {/* ----- Large Floating Ghost Text ----- */}
-      <motion.div 
-        style={{ y: yTranslate, opacity: 0.02 }}
-        className="pointer-events-none absolute left-0 top-0 z-0 whitespace-nowrap font-anton text-[25vw] leading-none text-white select-none"
-      >
-        AESTHETIC ENGINEER
-      </motion.div>
-
-      <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12">
-        {/* ----- Header Section ----- */}
-        <div className="max-w-4xl">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true }}
-          >
-            <span className="mb-4 inline-block font-mono text-[10px] uppercase tracking-[0.5em] text-[#D3FF52]">
-              // 01 — THE IDENTITY
-            </span>
-            <h2 className="mb-8 font-anton text-7xl leading-[0.85] tracking-tighter md:text-9xl lg:text-[10rem]">
-              CODE AS <br />
-              <span className="text-[#D3FF52]">KINETIC</span> <br />
-              <span className="font-serif italic text-white/40 tracking-normal">ART.</span>
-            </h2>
-            <p className="max-w-2xl font-inter text-xl leading-relaxed text-zinc-500 md:text-2xl">
-              I am a digital architect specializing in the intersection of 
-              <span className="text-white"> high-performance logic </span> 
-              and immersive motion. I translate complex ideas into fluid, cinematic experiences that live on the edge of innovation.
-            </p>
-          </motion.div>
-        </div>
-
-        {/* ----- Philosophy Grid ----- */}
-        <div className="mt-40 grid gap-4 md:grid-cols-3">
-          {philosophy.map((item, index) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.15, duration: 0.6 }}
-              viewport={{ once: true }}
-              className="group relative rounded-3xl border border-white/5 bg-white/[0.01] p-10 transition-all hover:bg-white/[0.03] hover:border-white/10"
-            >
-              <div className="mb-8 h-px w-8 bg-[#D3FF52] group-hover:w-full transition-all duration-500" />
-              <h3 className="mb-4 font-poppins text-lg font-bold text-white uppercase tracking-tight">{item.title}</h3>
-              <p className="text-zinc-500 leading-relaxed text-sm">{item.description}</p>
-            </motion.div>
-          ))}
-        </div>
-
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 md:px-12">
         {/* ----- Tech Ecosystem ----- */}
         <motion.div 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 1 }}
           viewport={{ once: true }}
-          className="mt-40 border-t border-white/5 pt-20"
+          className="mt-10"
         >
           <div className="flex flex-col gap-16 lg:flex-row lg:items-start">
             <div className="lg:w-1/4">
@@ -119,7 +47,7 @@ export default function About() {
             </div>
             
             <div className="lg:w-3/4">
-              <ScratchToReveal width={1000} height={420} brushSize={70}>
+              <ScratchToReveal height={420} brushSize={70}>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
                   {skillStack.map((skill, index) => (
                     <motion.div
@@ -146,26 +74,6 @@ export default function About() {
           </div>
         </motion.div>
 
-        {/* ----- Final Vision Callout ----- */}
-        <motion.div
-          initial={{ opacity: 0, y: 80 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "circOut" }}
-          viewport={{ once: true }}
-          className="mt-48 flex flex-col items-center text-center"
-        >
-          <div className="mb-16 h-32 w-[1px] bg-gradient-to-b from-transparent via-[#D3FF52] to-transparent" />
-          <p className="max-w-4xl font-serif text-4xl italic leading-[1.1] text-white/90 md:text-6xl lg:text-7xl">
-            "We are not just building tools. We are defining the new visual language of the digital age."
-          </p>
-          <motion.button
-            whileHover={{ scale: 1.05, letterSpacing: '0.3em' }}
-            whileTap={{ scale: 0.95 }}
-            className="mt-16 rounded-full border border-[#D3FF52]/20 bg-[#D3FF52]/5 px-12 py-5 font-poppins text-xs font-bold uppercase tracking-[0.2em] text-[#D3FF52] backdrop-blur-md hover:bg-[#D3FF52] hover:text-black transition-all duration-500"
-          >
-            Initiate Contact
-          </motion.button>
-        </motion.div>
       </div>
 
       {/* ----- Subtle Grid Overlay ----- */}

@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ExternalLink,
   Code2,
   Brain,
-  Database,
-  Rocket,
   AlertTriangle,
   CheckCircle2,
   Layers,

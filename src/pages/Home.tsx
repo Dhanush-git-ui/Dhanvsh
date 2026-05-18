@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import SelectedWorks from '../components/SelectedWorks';
 import HeroImageReveal from '../components/HeroImageReveal';
 import About from '../components/about';

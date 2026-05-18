@@ -186,7 +186,7 @@ export default function Experience() {
       <div className="relative z-10 flex flex-col gap-10 border-l border-greyDark ml-2 md:ml-4 pl-6 md:pl-10">
         {experiences.map((exp, index) => {
           const Icon = exp.icon;
-          const colors = colorClasses[exp.color];
+          const colors = colorClasses[exp.color as keyof typeof colorClasses];
 
           return (
             <motion.div

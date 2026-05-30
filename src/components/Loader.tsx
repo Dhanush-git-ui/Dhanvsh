@@ -42,14 +42,12 @@ export default function Loader() {
     <AnimatePresence>
       {visible && (
         <motion.div
-          initial={{ opacity: 1 }}
+          initial={{ y: "0%" }}
           exit={{
-            opacity: 0,
-            scale: 1.025,
-            filter: "blur(10px)",
+            y: "-100%",
           }}
           transition={{
-            duration: 1.1,
+            duration: 0.95,
             ease: [0.76, 0, 0.24, 1],
           }}
           className="
@@ -69,7 +67,7 @@ export default function Loader() {
           <motion.div
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75 }}
+            transition={{ duration: 0.6 }}
             className="
               absolute 
               left-6 
@@ -90,7 +88,7 @@ export default function Loader() {
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75 }}
+            transition={{ duration: 0.6 }}
             className="
               absolute 
               bottom-6 
@@ -109,31 +107,28 @@ export default function Loader() {
 
           {/* Main content */}
           <div className="relative flex h-72 w-full flex-col items-center justify-center px-6">
-            <AnimatePresence mode="wait">
+            <AnimatePresence>
               {!showBrand ? (
                 <motion.div
                   key={greetings[step]}
                   initial={{
                     opacity: 0,
-                    y: 18,
-                    scale: 0.97,
-                    filter: "blur(8px)",
+                    y: 20,
+                    filter: "blur(6px)",
                   }}
                   animate={{
                     opacity: 1,
                     y: 0,
-                    scale: 1,
                     filter: "blur(0px)",
                   }}
                   exit={{
                     opacity: 0,
-                    y: -18,
-                    scale: 1.03,
-                    filter: "blur(8px)",
+                    y: -20,
+                    filter: "blur(6px)",
                   }}
                   transition={{
-                    duration: 0.65,
-                    ease: [0.22, 1, 0.36, 1],
+                    duration: 0.55,
+                    ease: [0.16, 1, 0.3, 1],
                   }}
                   className="absolute inset-0 flex items-center justify-center"
                 >
@@ -157,35 +152,32 @@ export default function Loader() {
                   key="brand"
                   initial={{
                     opacity: 0,
-                    y: 26,
-                    scale: 0.92,
-                    filter: "blur(10px)",
+                    y: 20,
+                    filter: "blur(8px)",
                   }}
                   animate={{
                     opacity: 1,
                     y: 0,
-                    scale: 1,
                     filter: "blur(0px)",
                   }}
                   exit={{
                     opacity: 0,
-                    y: -26,
-                    scale: 1.035,
-                    filter: "blur(10px)",
+                    y: -20,
+                    filter: "blur(8px)",
                   }}
                   transition={{
-                    duration: 0.9,
-                    ease: [0.22, 1, 0.36, 1],
+                    duration: 0.7,
+                    ease: [0.16, 1, 0.3, 1],
                   }}
                   className="relative flex items-end"
                 >
                   <motion.span
-                    initial={{ x: 34, opacity: 0 }}
+                    initial={{ x: 20, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{
-                      duration: 0.72,
-                      delay: 0.08,
-                      ease: [0.22, 1, 0.36, 1],
+                      duration: 0.6,
+                      delay: 0.05,
+                      ease: [0.16, 1, 0.3, 1],
                     }}
                     className="
                       text-[7rem] 
@@ -200,12 +192,12 @@ export default function Loader() {
                   </motion.span>
 
                   <motion.span
-                    initial={{ x: -34, opacity: 0 }}
+                    initial={{ x: -20, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{
-                      duration: 0.72,
-                      delay: 0.22,
-                      ease: [0.22, 1, 0.36, 1],
+                      duration: 0.6,
+                      delay: 0.15,
+                      ease: [0.16, 1, 0.3, 1],
                     }}
                     className="
                       text-[7rem] 
@@ -223,9 +215,9 @@ export default function Loader() {
                     initial={{ scale: 0, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{
-                      duration: 0.48,
-                      delay: 0.58,
-                      ease: [0.22, 1, 0.36, 1],
+                      duration: 0.4,
+                      delay: 0.4,
+                      ease: [0.16, 1, 0.3, 1],
                     }}
                     className="
                       ml-3 
@@ -245,9 +237,9 @@ export default function Loader() {
                     initial={{ scaleX: 0, opacity: 0 }}
                     animate={{ scaleX: 1, opacity: 1 }}
                     transition={{
-                      duration: 0.75,
-                      delay: 0.48,
-                      ease: [0.76, 0, 0.24, 1],
+                      duration: 0.65,
+                      delay: 0.3,
+                      ease: [0.16, 1, 0.3, 1],
                     }}
                     className="
                       absolute 
@@ -267,8 +259,8 @@ export default function Loader() {
                     initial={{ opacity: 0, y: 6 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
-                      duration: 0.65,
-                      delay: 0.9,
+                      duration: 0.55,
+                      delay: 0.6,
                       ease: "easeOut",
                     }}
                     className="

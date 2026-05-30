@@ -11,56 +11,84 @@ interface RevealWordProps {
 
 const aboutWords = [
   { text: "I", type: "normal" },
-  { text: "don’t", type: "normal" },
-  { text: "build", type: "orange" },
-  { text: "pages.", type: "normal" },
+  { text: "have", type: "muted" },
+  { text: "always", type: "muted" },
+  { text: "been", type: "muted" },
+  { text: "more", type: "muted" },
+  { text: "interested", type: "normal" },
+  { text: "in", type: "muted" },
+  { text: "building", type: "bigOrange" },
 
-  { text: "I", type: "normal" },
-  { text: "build", type: "normal" },
-  { text: "first", type: "normal" },
-  { text: "impressions.", type: "big" },
+  { text: "than", type: "muted" },
+  { text: "consuming.", type: "normal" },
 
-  { text: "The", type: "muted" },
-  { text: "kind", type: "muted" },
-  { text: "that", type: "muted" },
-  { text: "make", type: "muted" },
-  { text: "someone", type: "muted" },
-  { text: "pause,", type: "muted" },
-
-  { text: "feel", type: "scratch" },
-  { text: "something,", type: "normal" },
-  { text: "and", type: "muted" },
-  { text: "then", type: "muted" },
-  { text: "click", type: "orange" },
-  { text: "deeper.", type: "normal" },
-
-  { text: "My", type: "muted" },
-  { text: "work", type: "normal" },
-  { text: "lives", type: "muted" },
-  { text: "between", type: "muted" },
-
-  { text: "logic", type: "outline" },
-  { text: "and", type: "muted" },
-  { text: "taste,", type: "orange" },
-
-  { text: "between", type: "muted" },
-  { text: "clean", type: "normal" },
-  { text: "code", type: "normal" },
-  { text: "and", type: "muted" },
-  { text: "tiny", type: "muted" },
-  { text: "details", type: "scratch" },
+  { text: "While", type: "muted" },
   { text: "most", type: "muted" },
   { text: "people", type: "muted" },
-  { text: "scroll", type: "muted" },
-  { text: "past.", type: "muted" },
+  { text: "use", type: "normal" },
+  { text: "apps,", type: "normal" },
 
   { text: "I", type: "normal" },
-  { text: "like", type: "normal" },
-  { text: "making", type: "normal" },
-  { text: "ordinary", type: "muted" },
-  { text: "screens", type: "normal" },
-  { text: "feel", type: "normal" },
-  { text: "alive.", type: "bigOrange" },
+  { text: "find", type: "muted" },
+  { text: "myself", type: "muted" },
+  { text: "driven", type: "italic" },
+
+  { text: "by", type: "muted" },
+  { text: "curiosity.", type: "outline" },
+
+  { text: "That", type: "muted" },
+  { text: "curiosity", type: "underline" },
+  { text: "led", type: "muted" },
+  { text: "me", type: "muted" },
+  { text: "into", type: "muted" },
+  { text: "software", type: "normal" },
+  { text: "development,", type: "normal" },
+
+  { text: "where", type: "muted" },
+  { text: "I", type: "normal" },
+  { text: "turn", type: "normal" },
+  { text: "ideas", type: "normal" },
+  { text: "into", type: "muted" },
+  { text: "products.", type: "orange" },
+
+  { text: "What", type: "muted" },
+  { text: "excites", type: "muted" },
+  { text: "me", type: "muted" },
+  { text: "most", type: "muted" },
+
+  { text: "is", type: "muted" },
+  { text: "the", type: "muted" },
+  { text: "challenge.", type: "outline" },
+
+  { text: "The", type: "muted" },
+  { text: "breakthrough.", type: "italic" },
+
+  { text: "The", type: "muted" },
+  { text: "moment", type: "normal" },
+  { text: "everything", type: "muted" },
+  { text: "clicks.", type: "underline" },
+
+  { text: "For", type: "muted" },
+  { text: "me,", type: "muted" },
+  { text: "development", type: "normal" },
+  { text: "is", type: "muted" },
+  { text: "not", type: "muted" },
+  { text: "just", type: "muted" },
+  { text: "code.", type: "normal" },
+
+  { text: "It", type: "normal" },
+  { text: "is", type: "muted" },
+  { text: "about", type: "muted" },
+  { text: "creating", type: "normal" },
+  { text: "experiences,", type: "normal" },
+
+  { text: "solving", type: "normal" },
+  { text: "problems,", type: "normal" },
+
+  { text: "and", type: "muted" },
+  { text: "never", type: "muted" },
+  { text: "stopping", type: "normal" },
+  { text: "learning.", type: "bigOrange" },
 ];
 
 export default function AboutRevealStatement() {
@@ -70,9 +98,6 @@ export default function AboutRevealStatement() {
     target: containerRef,
     offset: ["start start", "end end"],
   });
-
-  const imageScale = useTransform(scrollYProgress, [0, 0.25, 1], [1, 0.97, 0.97]);
-  const imageY = useTransform(scrollYProgress, [0, 0.25, 1], [0, -8, -8]);
 
   return (
     <section
@@ -103,8 +128,8 @@ export default function AboutRevealStatement() {
         "
       >
         {/* Background Glow */}
-        <div className="pointer-events-none absolute left-[-180px] top-[25%] h-[360px] w-[360px] rounded-full bg-orange-500/10 blur-[130px]" />
-        <div className="pointer-events-none absolute right-[-180px] bottom-[15%] h-[360px] w-[360px] rounded-full bg-red-500/10 blur-[140px]" />
+        <div className="pointer-events-none absolute left-[-180px] top-[25%] h-[360px] w-[360px] rounded-full bg-white/[0.03] blur-[130px]" />
+        <div className="pointer-events-none absolute right-[-180px] bottom-[15%] h-[360px] w-[360px] rounded-full bg-white/[0.03] blur-[140px]" />
 
         {/* Subtle Grid Texture */}
         <div
@@ -119,56 +144,15 @@ export default function AboutRevealStatement() {
         />
 
         <div className="relative z-10 mx-auto w-full max-w-[1250px]">
-          {/* Notebook-style Top Right Image */}
-          <motion.div
-            style={{
-              scale: imageScale,
-              y: imageY,
-            }}
-            className="
-              relative
-              mb-10
-              ml-auto
-              w-full
-              max-w-[260px]
-              rounded-[1.4rem]
-              border
-              border-white/10
-              bg-white/5
-              p-1
-              shadow-2xl
-              backdrop-blur-md
-              md:absolute
-              md:right-0
-              md:top-0
-              md:mb-0
-              md:max-w-[320px]
-            "
-          >
-            <img
-              src="/profile-lake.png"
-              alt="Profile visual"
-              className="
-                h-[330px]
-                w-full
-                rounded-[1.1rem]
-                object-cover
-                md:h-[430px]
-              "
-            />
-
-            <div className="pointer-events-none absolute inset-1 rounded-[1.1rem] ring-1 ring-white/10" />
-          </motion.div>
-
           {/* Label */}
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, ease: "easeOut" }}
             viewport={{ once: true }}
-            className="mb-8 flex items-center gap-3 md:pr-[380px]"
+            className="mb-8 flex items-center gap-3"
           >
-            <span className="h-2 w-2 rounded-full bg-orange-500 shadow-[0_0_20px_rgba(249,115,22,0.9)]" />
+            <span className="h-2 w-2 rounded-full bg-white shadow-[0_0_15px_rgba(255,255,255,0.7)]" />
             <span
               className="
                 text-xs
@@ -190,7 +174,6 @@ export default function AboutRevealStatement() {
               uppercase
               leading-[1.04]
               tracking-[-0.055em]
-              md:pr-[380px]
             "
           >
             {aboutWords.map((word, index) => {
@@ -213,7 +196,7 @@ export default function AboutRevealStatement() {
 
               if (word.type === "orange") {
                 className =
-                  "text-[9.3vw] md:text-[4.65vw] lg:text-[3.9vw] text-orange-500 drop-shadow-[0_0_24px_rgba(249,115,22,0.18)]";
+                  "text-[9.3vw] md:text-[4.65vw] lg:text-[3.9vw] text-white drop-shadow-[0_0_24px_rgba(255,255,255,0.22)] font-black";
               }
 
               if (word.type === "big") {
@@ -223,7 +206,7 @@ export default function AboutRevealStatement() {
 
               if (word.type === "bigOrange") {
                 className =
-                  "text-[11.2vw] md:text-[5.85vw] lg:text-[5vw] text-orange-500 tracking-[-0.07em] drop-shadow-[0_0_28px_rgba(249,115,22,0.22)]";
+                  "text-[11.2vw] md:text-[5.85vw] lg:text-[5vw] text-white tracking-[-0.07em] drop-shadow-[0_0_28px_rgba(255,255,255,0.25)] font-black";
               }
 
               if (word.type === "outline") {
@@ -234,6 +217,17 @@ export default function AboutRevealStatement() {
               if (word.type === "scratch") {
                 className =
                   "text-[9.3vw] md:text-[4.65vw] lg:text-[3.9vw] text-white";
+
+              }
+
+              if (word.type === "italic") {
+                className =
+                  "italic text-[9.3vw] md:text-[4.65vw] lg:text-[3.9vw] text-white";
+              }
+
+              if (word.type === "underline") {
+                className =
+                "underline underline-offset-[0.18em] decoration-white text-[9.3vw] md:text-[4.65vw] lg:text-[3.9vw] text-white";
               }
 
               return (
@@ -328,8 +322,8 @@ const RevealWord: React.FC<RevealWordProps> = ({
               origin-right
               -translate-y-1/2
               rounded-full
-              bg-orange-500
-              shadow-[0_0_18px_rgba(249,115,22,0.75)]
+              bg-white
+              shadow-[0_0_18px_rgba(255,255,255,0.85)]
             "
           />
         )}

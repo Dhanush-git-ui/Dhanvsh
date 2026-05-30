@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import {
   motion,
   useScroll,
@@ -6,6 +7,8 @@ import {
   useSpring,
   MotionValue,
 } from "framer-motion";
+
+const MotionLink = motion(Link);
 
 interface Project {
   id: string;
@@ -21,28 +24,28 @@ const projects: Project[] = [
     title: "Formula 1 Analytics",
     category: "ML",
     imageUrl: "/f1.png",
-    link: "#",
+    link: "/projects?project=f1",
   },
   {
     id: "02",
-    title: "Collage Regulations",
+    title: "College Regulations",
     category: "RAG & VECTOR DB",
     imageUrl: "/hitam.png",
-    link: "#",
+    link: "/projects?project=hitam",
   },
   {
     id: "03",
     title: "LEARNIVERSE",
-    category: "Fullstack - AI & ML & LLM ",
+    category: "Fullstack - AI & ML & LLM , Dual Persona RAG , LLM ",
     imageUrl: "/learniverse.png",
-    link: "#",
+    link: "/projects?project=learniverse",
   },
   {
     id: "04",
     title: "Startupsync",
-    category: "Finance -  Fullstack",
+    category: "Finance - Fullstack",
     imageUrl: "/startupsync.png",
-    link: "#",
+    link: "/projects?project=startupsync",
   },
 ];
 
@@ -107,8 +110,8 @@ function ProjectCard({
   );
 
   return (
-    <motion.a
-      href={project.link}
+    <MotionLink
+      to={project.link}
       style={{
         x,
         y,
@@ -153,7 +156,7 @@ function ProjectCard({
       <div className="absolute right-6 top-6 z-20 text-sm text-white/40">
         {project.id}
       </div>
-    </motion.a>
+    </MotionLink>
   );
 }
 

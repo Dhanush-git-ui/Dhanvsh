@@ -178,5 +178,20 @@
   .reveal-mask:hover {
     mask-position: left;
   }
+
+  /* Custom scrollbar for skill cards */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(211, 255, 82, 0.5);
+  }
 }
 @media print { body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }

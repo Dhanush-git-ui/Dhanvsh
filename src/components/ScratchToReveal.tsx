@@ -23,12 +23,17 @@ const marqueeItems = [
   "TypeScript",
   "Node.js",
   "Python",
+  "RAG",
+  "Vector DB",
+  "LLMs",
   "Flask",
-  "MongoDB",
+  "SQL-lite",
   "Tailwind CSS",
   "Framer Motion",
   "AI / ML",
   "APIs",
+  "chroma db",
+  "ollama",
 ];
 
 export const ScratchToReveal: React.FC<ScratchToRevealProps> = ({
@@ -257,10 +262,19 @@ export const ScratchToReveal: React.FC<ScratchToRevealProps> = ({
       frameId = requestAnimationFrame(checkScratched);
     };
 
-    const onPointerDown = (e: MouseEvent | TouchEvent) => {
-      e.preventDefault();
+    let touchStartPos = { x: 0, y: 0 };
+    let isVerticalSwipe = false;
 
+    const onPointerDown = (e: MouseEvent | TouchEvent) => {
       if (isCompleteRef.current) return;
+
+      if (!("touches" in e)) {
+        e.preventDefault();
+      } else {
+        const touch = e.touches[0];
+        touchStartPos = { x: touch?.clientX || 0, y: touch?.clientY || 0 };
+        isVerticalSwipe = false;
+      }
 
       drawing = true;
 
@@ -272,7 +286,28 @@ export const ScratchToReveal: React.FC<ScratchToRevealProps> = ({
     const onPointerMove = (e: MouseEvent | TouchEvent) => {
       if (!drawing || isCompleteRef.current) return;
 
-      e.preventDefault();
+      if ("touches" in e) {
+        const touch = e.touches[0];
+        const diffX = (touch?.clientX || 0) - touchStartPos.x;
+        const diffY = (touch?.clientY || 0) - touchStartPos.y;
+
+        if (!isVerticalSwipe && Math.abs(diffY) > 6 && Math.abs(diffY) > Math.abs(diffX)) {
+          isVerticalSwipe = true;
+          drawing = false;
+          lastPointRef.current = null;
+          return;
+        }
+
+        if (isVerticalSwipe) {
+          return;
+        }
+
+        if (e.cancelable) {
+          e.preventDefault();
+        }
+      } else {
+        e.preventDefault();
+      }
 
       const { x, y } = getPos(e);
       scratch(x, y);
@@ -410,8 +445,10 @@ export const ScratchToReveal: React.FC<ScratchToRevealProps> = ({
         )}
 
         {/* Skills Content - always behind canvas */}
-        <div className="absolute inset-0 z-10 flex items-center justify-center p-6 md:p-8">
-          {children}
+        <div className="absolute inset-0 z-10 overflow-y-auto custom-scrollbar p-6 md:p-8 flex flex-col items-center justify-start">
+          <div className="w-full">
+            {children}
+          </div>
         </div>
 
         {/* Scratch Canvas */}

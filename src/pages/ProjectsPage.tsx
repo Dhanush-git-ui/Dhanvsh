@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+
 import {
   ExternalLink,
   Code2,
@@ -338,29 +340,117 @@ const projects: Project[] = [
   },
 ];
 
-const getAccentClasses = () => ({
-  border: "hover:border-red-500/60",
-  text: "text-red-500",
-  bg: "bg-red-500/10",
-  dot: "bg-red-500",
-  shadow: "hover:shadow-[0_0_45px_rgba(239,68,68,0.16)]",
-});
+const getAccentClasses = (index: number) => {
+  if (index === 3) {
+    // Red for F1
+    return {
+      border: "hover:border-red-500/60",
+      text: "text-red-500",
+      bg: "bg-red-500/10",
+      dot: "bg-red-500",
+      shadow: "hover:shadow-[0_0_45px_rgba(239,68,68,0.16)]",
+      liveBg: "bg-red-500 border-red-500/40",
+      textBorder: "hover:border-red-500/50",
+      challengesBorder: "border-red-500/20",
+      challengesBg: "bg-red-500/[0.04]",
+    };
+  } else if (index === 2) {
+    // Green for Hitam Regulations
+    return {
+      border: "hover:border-green-500/60",
+      text: "text-green-500",
+      bg: "bg-green-500/10",
+      dot: "bg-green-500",
+      shadow: "hover:shadow-[0_0_45px_rgba(34,197,94,0.16)]",
+      liveBg: "bg-green-500 border-green-500/40",
+      textBorder: "hover:border-green-500/50",
+      challengesBorder: "border-green-500/20",
+      challengesBg: "bg-green-500/[0.04]",
+    };
+  } else {
+    // Blue for startupsync and learniverse
+    return {
+      border: "hover:border-blue-500/60",
+      text: "text-blue-500",
+      bg: "bg-blue-500/10",
+      dot: "bg-blue-500",
+      shadow: "hover:shadow-[0_0_45px_rgba(59,130,246,0.16)]",
+      liveBg: "bg-blue-500 border-blue-500/40",
+      textBorder: "hover:border-blue-500/50",
+      challengesBorder: "border-blue-500/20",
+      challengesBg: "bg-blue-500/[0.04]",
+    };
+  }
+};
+
+const getRadialBg = (index: number) => {
+  if (index === 3) return "bg-[radial-gradient(circle_at_center,rgba(239,68,68,0.12),transparent_34%)]";
+  if (index === 2) return "bg-[radial-gradient(circle_at_center,rgba(34,197,94,0.12),transparent_34%)]";
+  return "bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.12),transparent_34%)]";
+};
+
+const getThumbnailActiveClasses = (index: number) => {
+  if (index === 3) return "border-red-500 shadow-[0_0_35px_rgba(239,68,68,0.35)]";
+  if (index === 2) return "border-green-500 shadow-[0_0_35px_rgba(34,197,94,0.35)]";
+  return "border-blue-500 shadow-[0_0_35px_rgba(59,130,246,0.35)]";
+};
+
+const getThumbnailTextClass = (index: number) => {
+  if (index === 3) return "text-red-500";
+  if (index === 2) return "text-green-500";
+  return "text-blue-500";
+};
+
+const getThumbnailDotClass = (index: number) => {
+  if (index === 3) return "bg-red-500";
+  if (index === 2) return "bg-green-500";
+  return "bg-blue-500";
+};
 
 export default function ProjectsPage() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const activeProject =
-    hoveredIndex !== null ? projects[hoveredIndex] : projects[selectedIndex];
+  const getInitialIndex = () => {
+    const project = searchParams.get("project");
 
-  const colors = getAccentClasses();
+    switch (project) {
+      case "f1":
+        return 3;
+
+      case "hitam":
+        return 2;
+
+      case "learniverse":
+        return 1;
+
+      case "startupsync":
+        return 0;
+
+      default:
+        return 0;
+    }
+  };
+
+  const [selectedIndex, setSelectedIndex] = useState<number>(getInitialIndex());
+
+  useEffect(() => {
+    setSelectedIndex(getInitialIndex());
+  }, [searchParams]);
+
+  const activeIndex =
+    hoveredIndex !== null ? hoveredIndex : selectedIndex;
+
+  const activeProject = projects[activeIndex];
+
+  const colors = getAccentClasses(activeIndex);
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden bg-[#050505] px-4 py-28 text-white select-none md:px-10 md:py-36">
       {/* Background */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(239,68,68,0.12),transparent_34%)] opacity-60" />
+      <div className={`pointer-events-none absolute inset-0 opacity-60 transition-all duration-500 ${getRadialBg(activeIndex)}`} />
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.15),#050505_78%)]" />
-      <div className="pointer-events-none absolute left-0 top-20 h-72 w-72 rounded-full bg-red-500/10 blur-3xl" />
+      <div className={`pointer-events-none absolute left-0 top-20 h-72 w-72 rounded-full blur-3xl transition-all duration-500 ${colors.bg}`} />
       <div className="pointer-events-none absolute bottom-20 right-0 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
 
       <div className="relative z-10 mx-auto max-w-7xl">
@@ -373,7 +463,7 @@ export default function ProjectsPage() {
           className="mb-14"
         >
           <div className="mb-4 flex items-center gap-3">
-            <Sparkles size={20} className="text-red-500" />
+            <Sparkles size={20} className={`transition-colors duration-500 ${colors.text}`} />
             <p className="font-mono text-xs uppercase tracking-[0.45em] text-white/55 md:text-sm">
               Selected Builds
             </p>
@@ -409,7 +499,11 @@ export default function ProjectsPage() {
                 type="button"
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
-                onClick={() => setSelectedIndex(index)}
+                onClick={() => {
+                  setSelectedIndex(index);
+                  const slugs = ["startupsync", "learniverse", "hitam", "f1"];
+                  setSearchParams({ project: slugs[index] });
+                }}
                 className="group flex flex-col items-center outline-none"
                 whileHover={{ y: -5 }}
                 whileTap={{ scale: 0.97 }}
@@ -422,7 +516,7 @@ export default function ProjectsPage() {
                 <div
                   className={`relative h-[74px] w-[132px] overflow-hidden rounded-xl border transition-all duration-300 md:h-[92px] md:w-[168px] ${
                     isActive
-                      ? "border-red-500 shadow-[0_0_35px_rgba(239,68,68,0.35)]"
+                      ? getThumbnailActiveClasses(index)
                       : "border-white/10"
                   }`}
                 >
@@ -442,7 +536,7 @@ export default function ProjectsPage() {
                 <div className="mt-4 flex flex-col items-center">
                   <span
                     className={`text-[13px] tracking-[0.35em] transition-colors duration-300 ${
-                      isActive ? "text-red-500" : "text-white/45"
+                      isActive ? getThumbnailTextClass(index) : "text-white/45"
                     }`}
                     style={{
                       fontFamily: "'Courier New', Courier, monospace",
@@ -452,7 +546,7 @@ export default function ProjectsPage() {
                   </span>
 
                   <span
-                    className={`mt-3 h-1.5 w-1.5 rounded-full bg-red-500 transition-all duration-300 ${
+                    className={`mt-3 h-1.5 w-1.5 rounded-full transition-all duration-300 ${getThumbnailDotClass(index)} ${
                       isActive ? "scale-100 opacity-100" : "scale-0 opacity-0"
                     }`}
                   />
@@ -473,7 +567,7 @@ export default function ProjectsPage() {
               transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
               className="text-center"
             >
-              <p className="mb-4 font-mono text-xs uppercase tracking-[0.35em] text-red-500 md:text-sm">
+              <p className={`mb-4 font-mono text-xs uppercase tracking-[0.35em] transition-colors duration-500 ${colors.text} md:text-sm`}>
                 {activeProject.category}
               </p>
 
@@ -521,7 +615,7 @@ export default function ProjectsPage() {
                       href={activeProject.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-xl border border-red-500/40 bg-red-500 px-4 py-2.5 font-mono text-sm text-white transition-all duration-300 hover:bg-white hover:text-black hover:border-white"
+                      className={`inline-flex items-center gap-2 rounded-xl border px-4 py-2.5 font-mono text-sm text-white transition-all duration-300 hover:bg-white hover:text-black hover:border-white transition-colors duration-500 ${colors.liveBg}`}
                     >
                       <ExternalLink size={16} />
                       Live Demo
@@ -544,7 +638,7 @@ export default function ProjectsPage() {
               <div>
                 <div className="mb-7">
                   <div className="mb-3 flex items-center gap-2">
-                    <Brain size={17} className="text-red-500" />
+                    <Brain size={17} className={`transition-colors duration-500 ${colors.text}`} />
                     <h3 className="font-mono text-xs uppercase tracking-[0.28em] text-white">
                       What is this project?
                     </h3>
@@ -557,7 +651,7 @@ export default function ProjectsPage() {
 
                 <div className="mb-7">
                   <div className="mb-3 flex items-center gap-2">
-                    <Layers size={17} className="text-red-500" />
+                    <Layers size={17} className={`transition-colors duration-500 ${colors.text}`} />
                     <h3 className="font-mono text-xs uppercase tracking-[0.28em] text-white">
                       Project Purpose
                     </h3>
@@ -570,7 +664,7 @@ export default function ProjectsPage() {
 
                 <div className="mb-7">
                   <div className="mb-3 flex items-center gap-2">
-                    <Code2 size={17} className="text-red-500" />
+                    <Code2 size={17} className={`transition-colors duration-500 ${colors.text}`} />
                     <h3 className="font-mono text-xs uppercase tracking-[0.28em] text-white">
                       Tech Skills Used
                     </h3>
@@ -580,7 +674,7 @@ export default function ProjectsPage() {
                     {activeProject.tech.map((skill) => (
                       <span
                         key={skill}
-                        className="rounded-full border border-white/10 bg-black/50 px-3 py-1.5 font-mono text-xs text-white/60 transition-colors hover:border-red-500/50 hover:text-white"
+                        className={`rounded-full border border-white/10 bg-black/50 px-3 py-1.5 font-mono text-xs text-white/60 transition-colors hover:text-white ${colors.textBorder}`}
                       >
                         {skill}
                       </span>
@@ -595,7 +689,7 @@ export default function ProjectsPage() {
               {/* Highlights */}
               <div className="rounded-2xl border border-white/10 bg-black/35 p-5">
                 <div className="mb-4 flex items-center gap-2">
-                  <CheckCircle2 size={17} className="text-red-500" />
+                  <CheckCircle2 size={17} className={`transition-colors duration-500 ${colors.text}`} />
                   <h3 className="font-mono text-xs uppercase tracking-[0.28em] text-white">
                     Key Work Done
                   </h3>
@@ -607,7 +701,7 @@ export default function ProjectsPage() {
                       key={index}
                       className="flex gap-3 font-inter text-sm leading-relaxed text-white/62"
                     >
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-red-500" />
+                      <span className={`mt-2 h-1.5 w-1.5 shrink-0 rounded-full transition-all duration-500 ${colors.dot}`} />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -615,9 +709,9 @@ export default function ProjectsPage() {
               </div>
 
               {/* Challenges */}
-              <div className="rounded-2xl border border-red-500/20 bg-red-500/[0.04] p-5">
+              <div className={`rounded-2xl border p-5 transition-all duration-500 ${colors.challengesBorder} ${colors.challengesBg}`}>
                 <div className="mb-4 flex items-center gap-2">
-                  <AlertTriangle size={17} className="text-red-500" />
+                  <AlertTriangle size={17} className={`transition-colors duration-500 ${colors.text}`} />
                   <h3 className="font-mono text-xs uppercase tracking-[0.28em] text-white">
                     Challenges Faced
                   </h3>
@@ -629,7 +723,7 @@ export default function ProjectsPage() {
                       key={index}
                       className="flex gap-3 font-inter text-sm leading-relaxed text-white/62"
                     >
-                      <span className="shrink-0 font-mono text-red-500">
+                      <span className={`shrink-0 font-mono transition-colors duration-500 ${colors.text}`}>
                         0{index + 1}
                       </span>
                       <span>{item}</span>
@@ -659,7 +753,7 @@ export default function ProjectsPage() {
             }}
           >
             Hover or click any project{" "}
-            <span className="text-red-500">to explore</span>
+            <span className={`transition-colors duration-500 ${colors.text}`}>to explore</span>
           </p>
         </div>
       </div>

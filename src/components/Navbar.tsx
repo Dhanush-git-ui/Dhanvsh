@@ -13,7 +13,7 @@ export default function Navbar() {
         <Link to="/contact" className="hover:text-white transition-colors">Connect</Link>
       </div>
 
-      <a href="/resume.html" target="_blank" className="border border-white/20 px-5 py-2 rounded-xl text-[10px] font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all">
+      <a href="/Dhanush_Gopavaram_Resume.pdf" target="_blank" className="border border-white/20 px-5 py-2 rounded-xl text-[10px] font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all">
         Resume
       </a>
     </nav>

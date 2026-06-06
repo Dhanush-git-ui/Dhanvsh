@@ -39,7 +39,7 @@ export default function HeroImageReveal() {
             {[...Array(20)].map((_, i) => (
               <div key={i} className="flex items-center gap-8">
                 <span className="text-white font-poppins font-bold text-2xl md:text-3xl uppercase">
-                  Designer At Work
+                  Engineer At Work
                 </span>
 
                 <span className="text-white font-poppins font-bold text-xl opacity-40">

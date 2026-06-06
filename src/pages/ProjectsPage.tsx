@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -432,11 +432,7 @@ export default function ProjectsPage() {
     }
   };
 
-  const [selectedIndex, setSelectedIndex] = useState<number>(getInitialIndex());
-
-  useEffect(() => {
-    setSelectedIndex(getInitialIndex());
-  }, [searchParams]);
+  const selectedIndex = getInitialIndex();
 
   const activeIndex =
     hoveredIndex !== null ? hoveredIndex : selectedIndex;
@@ -500,7 +496,6 @@ export default function ProjectsPage() {
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
                 onClick={() => {
-                  setSelectedIndex(index);
                   const slugs = ["startupsync", "learniverse", "hitam", "f1"];
                   setSearchParams({ project: slugs[index] });
                 }}

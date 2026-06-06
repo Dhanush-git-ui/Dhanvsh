@@ -37,7 +37,7 @@ const contactLinks = [
   {
     title: "LinkedIn",
     value: "/in/dhanush-gopavaram",
-    href: "https://www.linkedin.com/in/dhanush-gopavarm-b77914320/",
+    href: "https://www.linkedin.com/in/dhanush-gopavaram-b77914320/",
     icon: Linkedin,
     label: "02",
     note: "Professional network",

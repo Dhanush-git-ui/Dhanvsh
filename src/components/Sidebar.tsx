@@ -34,7 +34,7 @@ export default function Sidebar() {
           <a href="https://github.com/Dhanush-git-ui" target="_blank" className="p-3 border border-greyDark rounded-full hover:bg-pureWhite hover:text-black transition-colors text-pureWhite">
             <Github size={18} />
           </a>
-          <a href="https://www.linkedin.com/in/dhanush-gopavarm-b77914320/" target="_blank" className="p-3 border border-greyDark rounded-full hover:bg-pureWhite hover:text-black transition-colors text-pureWhite">
+          <a href="https://www.linkedin.com/in/dhanush-gopavaram-b77914320/" target="_blank" className="p-3 border border-greyDark rounded-full hover:bg-pureWhite hover:text-black transition-colors text-pureWhite">
             <Linkedin size={18} />
           </a>
         </div>

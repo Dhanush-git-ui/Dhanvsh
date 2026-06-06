@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-// Define TypeScript interfaces for your component props
 interface AboutMeProps {
   greeting?: string;
   mainBio?: string;
@@ -10,7 +9,6 @@ interface AboutMeProps {
   portraitImgUrl?: string;
 }
 
-// Custom Starburst SVG component for the decorative graphics
 const Starburst = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 100 100" className={`text-white z-10 ${className}`} xmlns="http://www.w3.org/2000/svg">
     <g stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
@@ -29,30 +27,26 @@ const Starburst = ({ className }: { className?: string }) => (
 
 const AboutMe: React.FC<AboutMeProps> = ({
   mainBio = "I'm a student and aspiring AI engineer passionate about building intelligent, user-focused digital products. I enjoy working across full-stack development, AI applications, and problem-solving, turning ideas into clean, functional, and meaningful experiences.",
-  secondaryBio = "I'm constantly learning, experimenting, and building with one goal in mind — to become a strong engineer who creates real impact through technology.",
+  secondaryBio = "I'm constantly learning, experimenting, and building with one goal in mind - to become a strong engineer who creates real impact through technology.",
   workspaceImgUrl = "/about_laptop.jpeg",
   portraitImgUrl = "/me.png"
 }) => {
   return (
     <section className="bg-black text-white overflow-hidden py-32 relative border-b border-white/10">
       <div className="max-w-6xl mx-auto px-6 md:px-12 relative">
-        
-        {/* The green squiggly line centered and spanning across */}
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] md:w-[90%] h-[400px] pointer-events-none z-0">
           <svg viewBox="0 0 500 200" className="w-full h-full text-[#9cff66] opacity-90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path 
-              d="M -50,80 C 100,200 350,-50 250,100 C 150,250 400,200 550,80" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="1.5" 
+            <path
+              d="M -50,80 C 100,200 350,-50 250,100 C 150,250 400,200 550,80"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
             />
           </svg>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-y-32 gap-x-12 relative z-10">
-          
-          {/* Row 1: Left - Main Bio */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -63,8 +57,7 @@ const AboutMe: React.FC<AboutMeProps> = ({
             </p>
           </motion.div>
 
-          {/* Row 1: Right - Portrait Image */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -77,8 +70,7 @@ const AboutMe: React.FC<AboutMeProps> = ({
             </div>
           </motion.div>
 
-          {/* Row 2: Left - Workspace Image */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -91,8 +83,7 @@ const AboutMe: React.FC<AboutMeProps> = ({
             <Starburst className="absolute -bottom-12 -right-4 md:-right-8 w-28 h-28 md:w-36 md:h-36 animate-[spin_25s_linear_infinite_reverse]" />
           </motion.div>
 
-          {/* Row 2: Right - Secondary Bio */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -102,7 +93,6 @@ const AboutMe: React.FC<AboutMeProps> = ({
               {secondaryBio}
             </p>
           </motion.div>
-          
         </div>
       </div>
     </section>

@@ -15,22 +15,22 @@ const ContactFooter: React.FC = () => {
   const socialLinks: SocialLink[] = [
     {
       platform: "Email",
-      label: "Dhanush Gopavaram's - Email Me!",
+      label: "Dhanush Gopavaram - Email",
       url: "mailto:dhanushgopavaram23@gmail.com",
       type: "email",
       icon: <FiMail />,
     },
     {
       platform: "GitHub",
-      label: "Dhanush Gopavaram's -GitHub",
+      label: "Dhanush Gopavaram - GitHub",
       url: "https://github.com/Dhanush-git-ui",
       type: "external",
       icon: <FaGithub />,
     },
     {
       platform: "LinkedIn",
-      label: "Dhanush Gopavaram's - LinkedIn",
-      url: "https://www.linkedin.com/in/dhanush-gopavarm-b77914320/",
+      label: "Dhanush Gopavaram - LinkedIn",
+      url: "https://www.linkedin.com/in/dhanush-gopavaram-b77914320/",
       type: "external",
       icon: <FaLinkedinIn />,
     },
@@ -56,11 +56,9 @@ const ContactFooter: React.FC = () => {
 
   return (
     <footer className="relative w-full overflow-hidden bg-[#050505] text-white font-sans">
-      {/* Background Glow Effects */}
       <div className="pointer-events-none absolute left-[-150px] top-[120px] h-[320px] w-[320px] rounded-full bg-[#5c54ed]/25 blur-[120px]" />
       <div className="pointer-events-none absolute right-[-160px] bottom-[120px] h-[360px] w-[360px] rounded-full bg-[#b2f08a]/20 blur-[130px]" />
 
-      {/* Top Marquee */}
       <div className="relative w-full overflow-hidden border-y border-white/10 py-4">
         <motion.div
           animate={{ x: ["0%", "-50%"] }}
@@ -79,7 +77,7 @@ const ContactFooter: React.FC = () => {
                   className="mx-5 text-[1.1rem] font-semibold uppercase tracking-[0.25em] text-white/80 md:text-[1.35rem]"
                 >
                   {marqueeItems[index % marqueeItems.length]}{" "}
-                  <span className="text-[#b2f08a]">✦</span>
+                  <span className="text-[#b2f08a]">*</span>
                 </span>
               ))}
             </div>
@@ -87,7 +85,6 @@ const ContactFooter: React.FC = () => {
         </motion.div>
       </div>
 
-      {/* Main Contact Section */}
       <div className="relative mx-auto max-w-[1200px] px-6 py-24 md:px-10 md:py-32">
         <div className="mb-16 max-w-[850px]">
           <motion.p
@@ -126,7 +123,6 @@ const ContactFooter: React.FC = () => {
           </motion.p>
         </div>
 
-        {/* Contact Cards */}
         <div className="grid gap-5">
           {socialLinks.map((link, index) => (
             <motion.a
@@ -167,7 +163,6 @@ const ContactFooter: React.FC = () => {
         </div>
       </div>
 
-      {/* Green Marquee */}
       <div className="relative w-full overflow-hidden bg-[#b2f08a] py-5">
         <motion.div
           animate={{ x: ["-50%", "0%"] }}
@@ -185,7 +180,7 @@ const ContactFooter: React.FC = () => {
                   key={`${groupIndex}-${index}`}
                   className="mx-5 text-[1.4rem] font-black uppercase tracking-[-0.04em] text-black md:text-[2.2rem]"
                 >
-                  More Projects Incoming ✺
+                  More Projects Incoming *
                 </span>
               ))}
             </div>
@@ -193,7 +188,6 @@ const ContactFooter: React.FC = () => {
         </motion.div>
       </div>
 
-      {/* Bottom Section */}
       <div className="relative mx-auto flex max-w-[1400px] flex-col items-center justify-between gap-12 px-6 py-16 md:flex-row md:px-10 md:py-20">
         <div className="text-center md:text-left">
           <p className="text-sm uppercase tracking-[0.3em] text-white/40">
